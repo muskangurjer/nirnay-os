@@ -49,6 +49,10 @@ export interface ChatMessage {
 interface HealthGridContextType {
   role: UserRole;
   setRole: (role: UserRole) => void;
+  isRoleSelected: boolean;
+  setIsRoleSelected: (selected: boolean) => void;
+  selectRole: (role: UserRole) => void;
+  returnToRoleSelection: () => void;
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
   t: (key: string) => string;
@@ -123,7 +127,17 @@ const HealthGridContext = createContext<HealthGridContextType | undefined>(undef
 
 export const HealthGridProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [role, setRole] = useState<UserRole>('patient');
+  const [isRoleSelected, setIsRoleSelected] = useState<boolean>(false);
   const [language, setLanguage] = useState<LanguageCode>('en');
+
+  const selectRole = (selectedRole: UserRole) => {
+    setRole(selectedRole);
+    setIsRoleSelected(true);
+  };
+
+  const returnToRoleSelection = () => {
+    setIsRoleSelected(false);
+  };
   const [patient, setPatient] = useState(MOCK_ACTIVE_PATIENT);
   const [hospitals, setHospitals] = useState<HospitalInfo[]>(MOCK_HOSPITALS);
   const [doctors] = useState<Doctor[]>(MOCK_DOCTORS);
@@ -522,6 +536,10 @@ export const HealthGridProvider: React.FC<{ children: ReactNode }> = ({ children
       value={{
         role,
         setRole,
+        isRoleSelected,
+        setIsRoleSelected,
+        selectRole,
+        returnToRoleSelection,
         language,
         setLanguage,
         t,

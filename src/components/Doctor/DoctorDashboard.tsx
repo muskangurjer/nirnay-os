@@ -3,6 +3,7 @@ import { useHealthGrid } from '../../context/HealthGridContext';
 import {
   MOCK_PATIENT_VITALS_TIMELINE
 } from '../../data/mockData';
+import { AIPatientInfluxInsights } from './AIPatientInfluxInsights';
 import {
   LineChart,
   Line,
@@ -29,7 +30,10 @@ import {
   ArrowRight,
   Stethoscope,
   ChevronRight,
-  Filter
+  Filter,
+  Sparkles,
+  TrendingUp,
+  BrainCircuit
 } from 'lucide-react';
 
 export const DoctorDashboard: React.FC = () => {
@@ -43,7 +47,7 @@ export const DoctorDashboard: React.FC = () => {
     showToast
   } = useHealthGrid();
 
-  const [activeDoctorTab, setActiveDoctorTab] = useState<'queue' | 'lookup' | 'schedule'>('queue');
+  const [activeDoctorTab, setActiveDoctorTab] = useState<'queue' | 'lookup' | 'influx' | 'schedule'>('queue');
   const [patientSearchQuery, setPatientSearchQuery] = useState('91-9482-1029-4821@abdm');
   const [isPatientDetailOpen, setIsPatientDetailOpen] = useState(false);
   const [isAddRxModalOpen, setIsAddRxModalOpen] = useState(false);
@@ -175,10 +179,10 @@ export const DoctorDashboard: React.FC = () => {
       </div>
 
       {/* Doctor Tabs Switcher */}
-      <div className="flex items-center gap-1.5 border-b border-slate-800 pb-1 text-xs">
+      <div className="flex items-center gap-1.5 border-b border-slate-800 pb-1 text-xs overflow-x-auto">
         <button
           onClick={() => setActiveDoctorTab('queue')}
-          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
+          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
             activeDoctorTab === 'queue'
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -187,8 +191,19 @@ export const DoctorDashboard: React.FC = () => {
           Priority Patient Queue & Triage
         </button>
         <button
+          onClick={() => setActiveDoctorTab('influx')}
+          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+            activeDoctorTab === 'influx'
+              ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950 font-bold'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+          }`}
+        >
+          <BrainCircuit className="w-3.5 h-3.5 text-indigo-400" />
+          <span>AI Patient Influx & Surge Trends</span>
+        </button>
+        <button
           onClick={() => setActiveDoctorTab('lookup')}
-          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
+          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
             activeDoctorTab === 'lookup'
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -198,7 +213,7 @@ export const DoctorDashboard: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveDoctorTab('schedule')}
-          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
+          className={`px-4 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
             activeDoctorTab === 'schedule'
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -208,9 +223,40 @@ export const DoctorDashboard: React.FC = () => {
         </button>
       </div>
 
+      {/* TAB: AI PATIENT INFLUX & DISEASE SURGE INSIGHTS */}
+      {activeDoctorTab === 'influx' && <AIPatientInfluxInsights />}
+
       {/* TAB 1: PRIORITY PATIENT QUEUE */}
       {activeDoctorTab === 'queue' && (
         <div className="space-y-4">
+          {/* AI Influx Advisory Callout */}
+          <div className="p-3.5 bg-gradient-to-r from-indigo-950/60 via-slate-900 to-teal-950/60 border border-indigo-500/40 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow animate-pulse">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <strong className="text-white">AI Epidemiological Surge Alert:</strong>
+                  <span className="px-2 py-0.2 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                    +38% Respiratory / COPD Surge Expected
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300">
+                  PM2.5 spike (380+) triggering acute broncho-constriction and elderly exacerbations.
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveDoctorTab('influx')}
+              className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shrink-0 transition-colors shadow-md shadow-indigo-950"
+            >
+              <span>View Disease Influx Forecast</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <Stethoscope className="w-4 h-4 text-indigo-400" />

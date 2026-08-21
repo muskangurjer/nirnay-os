@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HealthGridProvider, useHealthGrid } from './context/HealthGridContext';
 import { SplashScreen } from './components/SplashScreen';
+import { RoleSelectionLanding } from './components/RoleSelectionLanding';
 import { TopNavbar } from './components/TopNavbar';
 import { GovernmentSchemesModal } from './components/GovernmentSchemesModal';
 import { NetworkHospitalsDrawer } from './components/NetworkHospitalsDrawer';
@@ -10,25 +11,39 @@ import { PatientDashboard } from './components/Patient/PatientDashboard';
 import { DoctorDashboard } from './components/Doctor/DoctorDashboard';
 import { AdminDashboard } from './components/Admin/AdminDashboard';
 import { SuperAdminDashboard } from './components/SuperAdmin/SuperAdminDashboard';
-import { CheckCircle2, AlertTriangle, Info, X } from 'lucide-react';
+import { Info } from 'lucide-react';
 
-const DashboardContent: React.FC = () => {
-  const { role, toastMessage } = useHealthGrid();
+const MainAppLayout: React.FC = () => {
+  const { role, isRoleSelected, toastMessage } = useHealthGrid();
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-teal-500 selection:text-white">
-      {/* Top Navbar */}
-      <TopNavbar />
+      {!isRoleSelected ? (
+        <RoleSelectionLanding />
+      ) : (
+        <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-teal-500 selection:text-white">
+          {/* Top Navbar */}
+          <TopNavbar />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {role === 'patient' && <PatientDashboard />}
-        {role === 'doctor' && <DoctorDashboard />}
-        {role === 'admin' && <AdminDashboard />}
-        {role === 'superadmin' && <SuperAdminDashboard />}
-      </main>
+          {/* Main Content Area */}
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            {role === 'patient' && <PatientDashboard />}
+            {role === 'doctor' && <DoctorDashboard />}
+            {role === 'admin' && <AdminDashboard />}
+            {role === 'superadmin' && <SuperAdminDashboard />}
+          </main>
 
-      {/* Global Modals & Floating Tools */}
+          {/* Footer */}
+          <footer className="border-t border-slate-900 bg-slate-950/80 py-4 text-center text-xs text-slate-500">
+            <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+              <span>NirnayOS • National Health Grid (Ayushman Bharat Digital Mission - ABDM)</span>
+              <span>Emergency Support: Dial 108 / 102 (National Helpline) • 24/7 NHA 14555</span>
+            </div>
+          </footer>
+        </div>
+      )}
+
+      {/* Global Modals & Floating Tools (accessible across landing & dashboards) */}
       <GovernmentSchemesModal />
       <NetworkHospitalsDrawer />
       <EmergencySosModal />
@@ -44,14 +59,6 @@ const DashboardContent: React.FC = () => {
           <span>{toastMessage}</span>
         </div>
       )}
-
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/80 py-4 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>NirnayOS • National Health Grid (Ayushman Bharat Digital Mission - ABDM)</span>
-          <span>Emergency Support: Dial 108 / 102 (National Helpline) • 24/7 NHA 14555</span>
-        </div>
-      </footer>
     </div>
   );
 };
@@ -64,7 +71,7 @@ export default function App() {
       {showSplash ? (
         <SplashScreen onComplete={() => setShowSplash(false)} />
       ) : (
-        <DashboardContent />
+        <MainAppLayout />
       )}
     </HealthGridProvider>
   );

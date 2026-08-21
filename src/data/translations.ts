@@ -39,7 +39,12 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     searchPlaceholder: 'Search doctors, hospitals, medicines...',
     abhaIdInput: 'Enter 14-Digit ABHA ID',
     abhaValid: 'Valid 14-Digit ABHA Format Verified',
-    autoGps: 'Auto-Detect GPS Location'
+    autoGps: 'Auto-Detect GPS Location',
+    switchDashboard: 'Switch Dashboard',
+    selectDashboardTitle: 'National Health Grid Access Hub',
+    selectDashboardSubtitle: 'Select a portal to access clinical workflows, real-time hospital administration, regional telemetry, or patient health services.',
+    enterPortal: 'Enter Portal',
+    launchDashboard: 'Launch Dashboard'
   },
   hi: {
     appTitle: 'निर्णयOS',
@@ -64,7 +69,12 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     searchPlaceholder: 'डॉक्टर, अस्पताल, दवाएं खोजें...',
     abhaIdInput: '14-अंकीय आभा आईडी दर्ज करें',
     abhaValid: 'मान्य 14-अंकीय आभा आईडी सत्यापित',
-    autoGps: 'जीपीएस स्थान स्वतः पहचानें'
+    autoGps: 'जीपीएस स्थान स्वतः पहचानें',
+    switchDashboard: 'डैशबोर्ड बदलें',
+    selectDashboardTitle: 'राष्ट्रीय स्वास्थ्य ग्रिड एक्सेस हब',
+    selectDashboardSubtitle: 'क्लिनिकल कार्यप्रवाह, वास्तविक समय अस्पताल प्रशासन, क्षेत्रीय टेलीमेट्री, या रोगी स्वास्थ्य सेवाओं तक पहुंचने के लिए एक पोर्टल चुनें।',
+    enterPortal: 'पोर्टल खोलें',
+    launchDashboard: 'डैशबोर्ड शुरू करें'
   },
   bn: {
     appTitle: 'নির্ণয়OS',
@@ -89,7 +99,12 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     searchPlaceholder: 'ডাক্তার, হাসপাতাল অনুসন্ধান করুন...',
     abhaIdInput: '১৪-সংখ্যার আভা আইডি লিখুন',
     abhaValid: 'বৈধ ১৪-সংখ্যার আভা আইডি যাচাইকৃত',
-    autoGps: 'জিপিএস অবস্থান সনাক্ত করুন'
+    autoGps: 'জিপিএস অবস্থান সনাক্ত করুন',
+    switchDashboard: 'ড্যাশবোর্ড পরিবর্তন করুন',
+    selectDashboardTitle: 'জাতীয় স্বাস্থ্য গ্রিড এক্সেস হাব',
+    selectDashboardSubtitle: 'ক্লিনিক্যাল ওয়ার্কফ্লো, রিয়েল-টাইম হাসপাতাল প্রশাসন, বা রোগী স্বাস্থ্য সেবা অ্যাক্সেস করতে একটি পোর্টাল নির্বাচন করুন।',
+    enterPortal: 'পোর্টাল খুলুন',
+    launchDashboard: 'ড্যাশবোর্ড শুরু করুন'
   },
   te: {
     appTitle: 'నిర్ణయ్OS',
@@ -114,7 +129,12 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     searchPlaceholder: 'వైద్యులు, ఆసుపత్రులను శోధించండి...',
     abhaIdInput: '14-అంకెల ఆభా ID నమోదు చేయండి',
     abhaValid: 'చెల్లుబాటు అయ్యే ఆభా ID ధృవీకరించబడింది',
-    autoGps: 'GPS స్థానాన్ని గుర్తించండి'
+    autoGps: 'GPS స్థానాన్ని గుర్తించండి',
+    switchDashboard: 'డాష్‌బోర్డ్ మార్చండి',
+    selectDashboardTitle: 'జాతీయ ఆరోగ్య గ్రిడ్ యాక్సెస్ హబ్',
+    selectDashboardSubtitle: 'క్లినికల్ వర్క్‌ఫ్లోలు, నిజ-సమయ ఆసుపత్రి నిర్వహణ లేదా రోగి ఆరోగ్య సేవలను యాక్సెస్ చేయడానికి ఒక పోర్టల్‌ను ఎంచుకోండి.',
+    enterPortal: 'పోర్టల్ తెరవండి',
+    launchDashboard: 'డాష్‌బోర్డ్ ప్రారంభించండి'
   },
   ta: {
     appTitle: 'நிர்ணய்OS',
@@ -139,7 +159,12 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     searchPlaceholder: 'மருத்துவர்களைத் தேடுங்கள்...',
     abhaIdInput: '14 இலக்க ஆபா ஐடி உள்ளிடவும்',
     abhaValid: 'சரியான ஆபா ஐடி சரிபார்க்கப்பட்டது',
-    autoGps: 'ஜிபிஎஸ் இருப்பிடத்தை கண்டறியவும்'
+    autoGps: 'ஜிபிஎஸ் இருப்பிடத்தை கண்டறியவும்',
+    switchDashboard: 'டாஷ்போர்டை மாற்றுக',
+    selectDashboardTitle: 'தேசிய சுகாதார கட்டமைப்பு அணுகல் மையம்',
+    selectDashboardSubtitle: 'மருத்துவ பணிப்பாய்வு, நிகழ்நேர மருத்துவமனை நிர்வாகம் அல்லது நோயாளி சுகாதார சேவைகளை அணுக போர்ட்டலை தேர்ந்தெடுக்கவும்.',
+    enterPortal: 'போர்ட்டலை திறக்க',
+    launchDashboard: 'டாஷ்போர்டைத் தொடங்கு'
   },
   mr: {
     appTitle: 'निर्णयOS',
@@ -164,6 +189,11 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     searchPlaceholder: 'डॉक्टर, रुग्णालये शोधा...',
     abhaIdInput: '१४-अंकी आभा आयडी प्रविष्ट करा',
     abhaValid: 'वैध १४-अंकी आभा आयडी सत्यापित',
-    autoGps: 'जीपीएस स्थान ओळखा'
+    autoGps: 'जीपीएस स्थान ओळखा',
+    switchDashboard: 'डॅशबोर्ड बदला',
+    selectDashboardTitle: 'राष्ट्रीय आरोग्य ग्रिड ॲक्सेस हब',
+    selectDashboardSubtitle: 'क्लिनिकल वर्कफ्लो, रिअल-टाइम रुग्णालय प्रशासन, किंवा रुग्ण आरोग्य सेवा ॲक्सेस करण्यासाठी एक पोर्टल निवडा.',
+    enterPortal: 'पोर्टल उघडा',
+    launchDashboard: 'डॅशबोर्ड सुरू करा'
   }
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHealthGrid } from '../../context/HealthGridContext';
+import { AISmartHospitalRecommendation } from '../Ambulance/AISmartHospitalRecommendation';
 import {
   Flame,
   X,
@@ -232,39 +233,22 @@ export const EmergencySosModal: React.FC = () => {
                 </p>
               </div>
 
-              {/* Destination Hospital Choice */}
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Target Destination Hospital (AI Recommended)
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {hospitals.slice(0, 4).map((h) => (
-                    <button
-                      key={h.id}
-                      type="button"
-                      onClick={() => setSelectedHospitalId(h.id)}
-                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                        selectedHospitalId === h.id
-                          ? 'bg-rose-950/60 border-rose-500 text-white ring-1 ring-rose-500'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-xs">{h.name.split(' ')[0]} Hospital</span>
-                        <span className="text-[10px] text-emerald-400">{h.icuBedsAvailable} ICU Beds</span>
-                      </div>
-                      <div className="text-[10px] text-slate-400">
-                        {h.distanceKm} km • {h.traumaLevel} Trauma Center
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {/* AI Smart Routing & Target Hospital Match Engine */}
+              <AISmartHospitalRecommendation
+                selectedHospitalId={selectedHospitalId}
+                pickupLocation={pickupAddress}
+                onSelectHospital={(hospId, complaint) => {
+                  setSelectedHospitalId(hospId);
+                  if (complaint) {
+                    setEmergencyReason(complaint);
+                  }
+                }}
+              />
 
               {/* Chief Emergency Reason */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Chief Emergency Complaint / Symptoms
+                  Additional Clinical Notes / Chief Emergency Symptoms
                 </label>
                 <textarea
                   rows={2}

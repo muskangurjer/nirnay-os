@@ -5,6 +5,7 @@ import {
   MOCK_OXYGEN_CONSUMPTION,
   MOCK_OPD_FLOW_TIMELINE
 } from '../../data/mockData';
+import { AIPredictiveBedAnalytics } from './AIPredictiveBedAnalytics';
 import {
   AreaChart,
   Area,
@@ -30,7 +31,10 @@ import {
   ShieldCheck,
   Zap,
   Sliders,
-  Building2
+  Building2,
+  BrainCircuit,
+  TrendingUp,
+  Sparkles
 } from 'lucide-react';
 
 export const AdminDashboard: React.FC = () => {
@@ -48,7 +52,7 @@ export const AdminDashboard: React.FC = () => {
   } = useHealthGrid();
 
   const [adminTab, setAdminTab] = useState<
-    'beds' | 'triage' | 'roster' | 'flow' | 'supply' | 'payroll'
+    'beds' | 'predictive' | 'triage' | 'roster' | 'flow' | 'supply' | 'payroll'
   >('beds');
 
   // Bed filter
@@ -97,6 +101,7 @@ export const AdminDashboard: React.FC = () => {
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-b border-slate-800 text-xs">
         {[
           { id: 'beds', label: 'Real-Time Bed Matrix', icon: <Bed className="w-3.5 h-3.5" /> },
+          { id: 'predictive', label: 'AI Predictive Bed & Staffing', icon: <BrainCircuit className="w-3.5 h-3.5 text-amber-400" /> },
           { id: 'triage', label: 'AI Triage & Prioritization', icon: <Zap className="w-3.5 h-3.5" /> },
           { id: 'roster', label: 'Staff Duty & Roster', icon: <Users className="w-3.5 h-3.5" /> },
           { id: 'flow', label: 'OPD Flow Optimization', icon: <Activity className="w-3.5 h-3.5" /> },
@@ -121,9 +126,40 @@ export const AdminDashboard: React.FC = () => {
         })}
       </div>
 
+      {/* TAB 1.5: AI PREDICTIVE BED & STAFFING ANALYTICS */}
+      {adminTab === 'predictive' && <AIPredictiveBedAnalytics />}
+
       {/* TAB 1: REAL-TIME BED ALLOTMENT MATRIX */}
       {adminTab === 'beds' && (
         <div className="space-y-4">
+          {/* AI Bed Surge Alert Callout */}
+          <div className="p-3.5 bg-gradient-to-r from-amber-950/60 via-slate-900 to-rose-950/60 border border-amber-500/40 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center text-white shrink-0 shadow animate-pulse">
+                <BrainCircuit className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <strong className="text-white">AI Neural Surge Forecast:</strong>
+                  <span className="px-2 py-0.2 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                    -4 ICU Deficit Risk on Thu-Fri
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300">
+                  Predicted 96% ICU capacity breach due to respiratory smog spike (AQI 380+).
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setAdminTab('predictive')}
+              className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shrink-0 transition-colors shadow-md shadow-amber-950"
+            >
+              <span>View 7-Day Bed Forecast & Staffing AI</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
           {/* Bed Filters & Status Tabs */}
           <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5">
             {/* Row 1: Bed Status Filter Tabs */}

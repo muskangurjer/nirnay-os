@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHealthGrid } from '../../context/HealthGridContext';
+import { AISmartHospitalRecommendation } from '../Ambulance/AISmartHospitalRecommendation';
 import {
   Calendar,
   Clock,
@@ -22,7 +23,8 @@ import {
   Phone,
   ArrowUpRight,
   Layers,
-  Radio
+  Radio,
+  Navigation
 } from 'lucide-react';
 
 export const PatientDashboard: React.FC = () => {
@@ -1138,22 +1140,35 @@ export const PatientDashboard: React.FC = () => {
                   <div className="text-[10px] text-emerald-400">Status: {ambulanceRequest.status}</div>
                 </div>
               </div>
+              <div className="pt-2 flex justify-end">
+                <button
+                  onClick={() => setEmergencySosModalOpen(true)}
+                  className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold cursor-pointer"
+                >
+                  Open Radar & Live GPS Tracking
+                </button>
+              </div>
             </div>
           ) : (
-            <div className="text-center py-10 space-y-3">
-              <div className="w-16 h-16 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 mx-auto">
-                <Flame className="w-8 h-8" />
+            <div className="space-y-6">
+              {/* AI Smart Routing Explorer */}
+              <AISmartHospitalRecommendation
+                selectedHospitalId="hosp-aiims"
+                pickupLocation={patient.address}
+                onSelectHospital={(hospId) => {
+                  setEmergencySosModalOpen(true);
+                }}
+              />
+
+              <div className="text-center pt-2">
+                <button
+                  onClick={() => setEmergencySosModalOpen(true)}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-rose-600 via-rose-500 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs shadow-xl shadow-rose-950 cursor-pointer flex items-center justify-center gap-2 mx-auto"
+                >
+                  <Flame className="w-4 h-4" />
+                  TRIGGER EMERGENCY DISPATCH WITH SELECTED AI CRITERIA
+                </button>
               </div>
-              <h3 className="text-base font-bold text-white">No active emergency ambulance request</h3>
-              <p className="text-xs text-slate-400 max-w-md mx-auto">
-                In case of critical emergencies (chest pain, trauma, acute breathing distress), press the SOS button to instantly dispatch the nearest hospital vehicle.
-              </p>
-              <button
-                onClick={() => setEmergencySosModalOpen(true)}
-                className="mt-2 px-6 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs shadow-lg shadow-rose-950 cursor-pointer"
-              >
-                REQUEST EMERGENCY ALS AMBULANCE
-              </button>
             </div>
           )}
         </div>

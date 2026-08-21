@@ -15,13 +15,16 @@ import {
   PhoneCall,
   Sparkles,
   Languages,
-  ChevronDown
+  ChevronDown,
+  LayoutDashboard,
+  ArrowLeftRight
 } from 'lucide-react';
 
 export const TopNavbar: React.FC = () => {
   const {
     role,
     setRole,
+    returnToRoleSelection,
     language,
     setLanguage,
     t,
@@ -154,8 +157,19 @@ export const TopNavbar: React.FC = () => {
               )}
             </div>
 
+            {/* Switch Dashboard Portal Button */}
+            <button
+              id="nav-switch-dashboard-btn"
+              onClick={returnToRoleSelection}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 hover:border-teal-500/50 text-xs font-semibold text-slate-200 transition-all cursor-pointer shadow-sm group"
+              title="Return to Dashboard Selection Screen"
+            >
+              <LayoutDashboard className="w-3.5 h-3.5 text-teal-400 group-hover:rotate-12 transition-transform" />
+              <span className="hidden sm:inline">{t('switchDashboard')}</span>
+            </button>
+
             {/* Global Role Switcher Pill Bar */}
-            <div className="flex items-center p-1 bg-slate-900/90 rounded-xl border border-slate-800">
+            <div className="hidden md:flex items-center p-1 bg-slate-900/90 rounded-xl border border-slate-800">
               {roleConfigs.map((r) => {
                 const isActive = role === r.id;
                 return (
@@ -170,7 +184,7 @@ export const TopNavbar: React.FC = () => {
                     }`}
                   >
                     {r.icon}
-                    <span className="hidden sm:inline">{t(r.labelKey)}</span>
+                    <span className="hidden lg:inline">{t(r.labelKey)}</span>
                   </button>
                 );
               })}

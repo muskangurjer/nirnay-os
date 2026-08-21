@@ -249,3 +249,89 @@ export interface GovernmentScheme {
   portalLink: string;
   badge: string;
 }
+
+// AI Predictive Analytics & Forecasting Types
+export interface BedDemandForecastDay {
+  day: string;
+  date: string;
+  generalDemand: number;
+  generalCapacity: number;
+  icuDemand: number;
+  icuCapacity: number;
+  hduDemand: number;
+  hduCapacity: number;
+  predictedSurgeRisk: number; // 0 - 100%
+  projectedShortage: number; // Deficit in beds (negative if shortage)
+  primarySurgeDriver: string;
+  confidenceScore: number;
+}
+
+export interface StaffingResourceRecommendation {
+  id: string;
+  roleType: 'ICU Specialist' | 'Staff Nurse' | 'Resident Medical Officer' | 'Respiratory Therapist' | 'Triage Officer' | 'Critical Care EMT';
+  currentStaffing: number;
+  recommendedStaffing: number;
+  deficit: number;
+  shiftTarget: 'Night Shift (00:00 - 08:00)' | 'Evening Shift (16:00 - 00:00)' | 'Morning Shift (08:00 - 16:00)' | 'Weekend Surge Roster';
+  priority: 'Critical' | 'High' | 'Moderate';
+  rationale: string;
+  impactScore: string;
+  suggestedAction: string;
+}
+
+export interface EquipmentResourceRecommendation {
+  id: string;
+  equipmentName: string;
+  category: 'Ventilators' | 'Oxygen Logistics' | 'Dialysis' | 'Monitoring' | 'Emergency Resuscitation';
+  currentAvailable: number;
+  projectedDemand: number;
+  recommendedBuffer: number;
+  actionRequired: string;
+  urgency: 'Immediate Action' | 'Warning' | 'Adequate';
+}
+
+export interface DiseaseTrendForecast {
+  id: string;
+  diseaseCategory: string;
+  shortName: string;
+  trendDirection: 'surge' | 'moderate' | 'stable';
+  percentageChange: number;
+  projectedWeeklyCases: number;
+  historicalWeeklyAvg: number;
+  riskLevel: 'Severe Alert' | 'Moderate Warning' | 'Baseline Monitoring';
+  environmentalDrivers: string[];
+  clinicalPreparednessActions: string[];
+  fastTrackLabTests: string[];
+  recommendedMedicationBuffer: string[];
+  ageGroupVulnerability: string;
+  dailyTrend: { day: string; cases: number; baseline: number }[];
+}
+
+export interface EmergencyTypeOption {
+  id: string;
+  name: string;
+  category: string;
+  iconName: string;
+  requiredFacility: string;
+  urgencyLevel: 'Critical (Golden Hour)' | 'Immediate ALS' | 'Urgent ALS/BLS';
+  matchingSpecialties: string[];
+  defaultComplaint: string;
+}
+
+export interface HospitalMatchRecommendation {
+  hospital: HospitalInfo;
+  matchScorePct: number;
+  rank: number;
+  etaMinutes: number;
+  distanceKm: number;
+  trafficStatus: 'Clear Green Corridor' | 'Moderate Traffic' | 'Heavy Congestion';
+  icuBedsAvailable: number;
+  generalBedsAvailable: number;
+  facilityMatch: {
+    facilityName: string;
+    isAvailable: boolean;
+    readinessStatus: string;
+  };
+  recommendationReasons: string[];
+  isPmjayEmpaneled: boolean;
+}
