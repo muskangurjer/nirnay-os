@@ -1,0 +1,10 @@
+{
+  "name": "NirnayOS — National Health Grid",
+  "description": "Production-ready, interactive national healthcare operating system dashboard connecting Patients, Doctors, Hospital Resource Admins, and Regional Super Admins with AI triage and emergency grid dispatch.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
